@@ -11,22 +11,17 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col font-sans selection:bg-accent selection:text-white">
-        {/* Navigation - Always Visible */}
         <Navbar onLoginClick={() => setShowLogin(true)} />
 
-        {/* Dynamic Pages */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/resume-upload" element={<ResumeUpload />} />
         </Routes>
 
-        {/* Footer - Always Visible */}
         <Footer />
 
-        {/* Global Login Modal - Accessible from anywhere */}
         {showLogin && (
           <div className="fixed inset-0 bg-primary-dark/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-             {/* We can build this modal content later */}
              <div className="bg-white p-10 rounded-3xl relative">
                 <button onClick={() => setShowLogin(false)} className="absolute top-4 right-4">✕</button>
                 <h2 className="text-2xl font-bold">Login Coming Soon</h2>
