@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import ManualEntry from './ManualEntry';
 
 const ResumeUpload = () => {
   const [dragActive, setDragActive] = useState(false);
@@ -119,9 +121,12 @@ const ResumeUpload = () => {
         <div className="mt-12 text-center">
           <p className="text-primary-muted font-medium">
             Don't have a resume yet?{' '}
-            <button className="text-brand font-black hover:underline underline-offset-4 decoration-2">
-              Fill details manually
-            </button>
+            <Link 
+  to="/manual-entry" 
+  className="text-brand font-black hover:underline underline-offset-4 decoration-2"
+>
+  Fill details manually
+</Link>
           </p>
         </div>
       </div>

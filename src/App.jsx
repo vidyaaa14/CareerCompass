@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import LandingPage from './Pages/LangingPage';
 import ResumeUpload from './Pages/ResumeUpload';
+import ManualEntry from './Pages/ManualEntry';
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/resume-upload" element={<ResumeUpload />} />
+          <Route path="/manual-entry" element={<ManualEntry />} />
         </Routes>
 
         <Footer />
