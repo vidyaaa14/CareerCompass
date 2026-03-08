@@ -1,73 +1,161 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { ChevronRight, Target, Sparkles, ShieldCheck, Zap } from 'lucide-react';
 
-const LandingPage = () => {
+const Landingpage = () => {
+  const navigate = useNavigate();
   return (
-    <div className="flex-grow flex flex-col">
-      {/* 1. Split Hero Section */}
-<section className="flex flex-col lg:flex-row min-h-screen w-full pt-27">        
-        {/* Left Side: The Image (Hidden on small screens or stacked) */}
-        <div className="lg:w-1/2 w-full h-[400px] lg:h-auto relative overflow-hidden">
-          <img 
-            src="src/assets/image.png" // Replace with your actual image path in the public folder
-            alt="Career Compass"
-            className="absolute inset-0 w-full h-full object-cover object-center animate-in fade-in duration-1000"
-          />
-          {/* Subtle Overlay to match your palette */}
-          <div className="absolute inset-0 bg-primary-dark/10 mix-blend-multiply" />
-        </div>
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-blue-500/40 overflow-x-hidden">
+      
+      {/* --- BACKGROUND ELEMENTS --- */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 opacity-[0.03]" 
+             style={{ backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+      </div>
 
-        {/* Right Side: The Content */}
-        <div className="lg:w-1/2 w-full flex flex-col justify-center items-center lg:items-start px-10 md:px-20 py-8 bg-[#FFFBF9] text-center lg:text-left">
-          <div className="max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-black text-primary-dark leading-tight tracking-tighter">
-              Your Career <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-brand via-accent to-warm">
-                Starts Here
-              </span>
-            </h1>
-            
-            <p className="mt-8 text-lg md:text-xl text-primary-muted font-medium leading-relaxed opacity-80">
-              A minimalist guidance system for the generation. Validate your skills 
-              through AI, build your roadmap, and secure your professional future with clarity.
-            </p>
+      <section className="relative max-w-7xl mx-auto px-6 pt-24 pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* LEFT: THE REALISTIC COMPASS */}
+          <div className="relative flex justify-center items-center h-[500px]">
+            {/* The Compass Body */}
+            <div className="relative w-80 h-80 md:w-[420px] md:h-[420px] rounded-full bg-gradient-to-b from-zinc-800 to-zinc-950 p-[2px] shadow-2xl">
+              <div className="absolute inset-0 rounded-full bg-[#080808] shadow-[inset_0_2px_20px_rgba(0,0,0,0.8)]" />
+              
+              {/* Internal Glass Reflection */}
+              <div className="absolute inset-4 rounded-full bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none z-20" />
 
-            <p className="mt-4 text-sm font-bold text-warm uppercase tracking-widest italic">
-              Trusted by students & early professionals
-            </p>
+              {/* Success / North Star */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center">
+                <motion.div 
+                  animate={{ opacity: [0.4, 1, 0.4], scale: [0.9, 1.1, 0.9] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-3 h-3 bg-blue-400 rounded-full shadow-[0_0_15px_#60a5fa]" 
+                />
+                <span className="mt-2 text-[10px] font-black tracking-[0.3em] text-blue-400 uppercase">SUCCESS</span>
+              </div>
 
-            <div className="mt-12 flex flex-col sm:flex-row items-center gap-8">
-              <Link 
-                to="/resume-upload" 
-                className="bg-primary-dark text-light px-10 py-5 rounded-2xl text-xl font-bold hover:scale-105 transition-all shadow-2xl hover:shadow-primary-muted/30"
+              {/* Degree Notches */}
+              {[...Array(60)].map((_, i) => (
+                <div key={i} className="absolute inset-0 flex justify-center py-6" style={{ transform: `rotate(${i * 6}deg)` }}>
+                  <div className={`w-[1px] rounded-full ${i % 5 === 0 ? 'h-4 bg-zinc-500' : 'h-2 bg-zinc-800'}`} />
+                </div>
+              ))}
+
+              {/* THE NEEDLE */}
+              <motion.div 
+                initial={{ rotate: -120 }}
+                animate={{ rotate: 0 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 40,
+                  damping: 12,
+                  delay: 0.8
+                }}
+                className="absolute inset-0 flex items-center justify-center z-40"
               >
-                Get your Roadmap
-              </Link>
-              <button className="group flex items-center gap-2 text-primary-dark font-bold text-lg hover:text-brand transition-colors">
-                How it works 
-                <span className="group-hover:translate-x-2 transition-transform">→</span>
-              </button>
+                <div className="relative h-[80%] w-6 flex flex-col items-center">
+                  {/* Top Needle (The Active Part) */}
+                  <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-bottom-[140px] border-bottom-blue-500 filter drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]" 
+                       style={{ borderBottomWidth: '140px', borderBottomStyle: 'solid' }} />
+                  
+                  {/* Center Hub */}
+                  <div className="w-8 h-8 rounded-full bg-zinc-900 border-2 border-zinc-700 z-50 flex items-center justify-center shadow-xl">
+                    <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]" />
+                  </div>
+
+                  {/* Bottom Needle (Balance) */}
+                  <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-top-[140px] border-top-zinc-800" 
+                       style={{ borderTopWidth: '100px', borderTopStyle: 'solid' }} />
+                </div>
+              </motion.div>
+
+              {/* Outer Glowing Ring */}
+              <div className="absolute -inset-4 border border-blue-500/10 rounded-full blur-sm" />
             </div>
+          </div>
+
+          {/* RIGHT: THE CONTENT */}
+          <div className="flex flex-col items-start text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center gap-3 mb-8 bg-zinc-900/50 border border-white/5 px-4 py-2 rounded-2xl"
+            >
+              <Sparkles size={16} className="text-blue-400" />
+              <span className="text-xs font-bold tracking-widest text-zinc-400 uppercase">AI-Guided Navigation</span>
+            </motion.div>
+
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-[0.9] text-zinc-100"
+            >
+              Map your <br />
+              <span className="text-blue-500">Future !</span>
+            </motion.h1>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-zinc-500 text-lg md:text-xl max-w-lg mb-12 leading-relaxed"
+            >
+          Precision career mapping powered by neural analysis. We bridge the gap between where you are and where the industry demands you to be.
+            </motion.p>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex items-center gap-6"
+            >
+              <button onClick={() => navigate('/resume-upload')} className="px-10 py-5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 hover:text-white transition-all active:scale-95 shadow-2xl shadow-white/5">
+                Get Started
+              </button>
+              <div className="hidden md:flex items-center gap-2 text-zinc-500">
+                <ShieldCheck size={18} />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 2. Feature Cards Section (Remains Below) */}
-      <section className="py-24 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-        <Feature icon="✨" title="Resume IQ" desc="Intelligent parsing for modern profiles." />
-        <Feature icon="🎯" title="Skill Check" desc="Adaptive testing that proves your worth." />
-        <Feature icon="🛤️" title="Roadmaps" desc="Step-by-step paths to your dream role." />
+      {/* --- REFINED BENTO FEATURES --- */}
+      <section className="max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <FeatureCard 
+            icon={<Target className="text-blue-500" />}
+            title="Skill Precision"
+            desc="We identify the exact technical gaps between you and your target salary."
+          />
+          <FeatureCard 
+            icon={<Zap className="text-purple-500" />}
+            title="Neural Matching"
+            desc="Our AI mimics executive recruiters to find roles that aren't publicly listed."
+          />
+          <FeatureCard 
+            icon={<Target className="text-emerald-500" />}
+            title="Market Value"
+            desc="Real-time global data tells you exactly what your expertise is worth today."
+          />
+        </div>
       </section>
     </div>
   );
 };
 
-const Feature = ({ icon, title, desc }) => (
-  <div className="p-10 rounded-[40px] border border-light/30 bg-white/50 hover:bg-white hover:border-accent/50 transition-all duration-500 hover:shadow-xl">
-    <div className="text-4xl mb-6">{icon}</div>
-    <h3 className="text-2xl font-bold mb-3 text-primary-dark">{title}</h3>
-    <p className="text-primary-muted font-medium leading-relaxed">{desc}</p>
+const FeatureCard = ({ icon, title, desc }) => (
+  <div className="p-8 rounded-[2rem] bg-zinc-900/20 border border-white/5 hover:border-white/10 transition-all group">
+    <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+      {icon}
+    </div>
+    <h3 className="text-lg font-bold mb-3">{title}</h3>
+    <p className="text-zinc-500 text-sm leading-relaxed">{desc}</p>
   </div>
 );
 
-export default LandingPage;
+export default Landingpage;
